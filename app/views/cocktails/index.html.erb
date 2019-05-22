@@ -1,18 +1,38 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-      <h1>All cocktails</h1>
-      <ul class="list-group">
-        <% @cocktails.each do |cocktail| %>
-          <li class="list-group-item">
-            <%= link_to cocktail.name, cocktail_path(cocktail) %>
-          </li>
-        <% end %>
-      </ul>
-      <%= link_to "Add a new Cocktail", new_cocktail_path, class: 'btn btn-primary' %>
-    </div>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://res.cloudinary.com/celiahei/image/upload/v1558531508/bar-beverages-boston-2225580_daixou.jpg);">
+  <div class="container">
+    <h1><strong>Come & Drink</strong>!</h1>
+    <p>Cocktail is life.</p>
+    <a class="btn btn-primary" href="#">Book now</a>
   </div>
 </div>
+
+<div class="card_global">
+  <% @cocktails.each do |cocktail| %>
+  <div class="card-trip">
+    <%= cl_image_tag cocktail.photo, height: 300, width: 400, crop: :fill, class: "card-img-top" %>
+      <div class="card-trip-infos">
+        <div>
+          <div class="info">
+            <h2 class="title"><%= link_to cocktail.name, cocktail_path(cocktail) %></h2>
+            <h2 class="trash"><%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, cocktail_path(cocktail), method: :delete, data: { confirm: "Delete #{cocktail.name}?" } %>
+            </h2>
+          </div>
+          <% cocktail.doses.each do |dose| %>
+          <p><%= dose.description %> <%= dose.ingredient.name %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="text-center">
+<%= link_to "Add a new Cocktail", new_cocktail_path, class: 'btn btn-primary' %>
+</div>
+
+
+
+
 
 
 
